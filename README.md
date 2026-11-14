@@ -8,7 +8,9 @@ Team Members
 Name : Shah Fawad khan 
 Role : Backend Developer
 
-2)
+2)n
+Name : Adeena Zaineb
+Role: Image Processing Engineer
 
 3)
 
