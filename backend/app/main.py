@@ -330,3 +330,10 @@ def inject_sweep(body: dict = Body(...)):
     """Recovery table over peak_snr 3,5,8,12 and distance 300,500,800 AU (SIMULATED)."""
     from . import planetx
     return SafeJSONResponse(planetx.sweep(body))
+
+
+# ---------------------------------------------------------------- built frontend (deployment)
+# Registered last so every API route above wins. No-op when frontend/dist is not built.
+from .webapp import mount_frontend  # noqa: E402
+
+mount_frontend(app)
