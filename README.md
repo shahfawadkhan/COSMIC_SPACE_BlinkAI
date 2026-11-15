@@ -103,7 +103,7 @@ http://localhost:3000/explorer?ra=269.4521&dec=4.69336&fov=4&embed=1
 cd backend
 python -m venv .venv
 .venv\Scripts\python -m pip install -r requirements-dev.txt
-# create backend\.env with SPHEREX_AI_URL / SPHEREX_AI_KEY (ask the team lead; never commit it)
+copy .env.example .env        # then fill in SPHEREX_AI_KEY (ask the team lead; never commit .env)
 .venv\Scripts\python -m uvicorn app.main:app --port 8000
 ```
 
