@@ -27,10 +27,13 @@ RUN pip install -r requirements.txt
 
 COPY backend/app ./app
 COPY --from=web /web/dist /app/static
+# SPHEREx images saved earlier for the test objects: copied into the cache at start-up so
+# those fields still open when NASA IRSA is down.
+COPY backend/seed_cache /app/seed-cache
 
 # run as an unprivileged user; the cache lives in /tmp (writable)
 RUN useradd --create-home --uid 10001 cosmic
 USER cosmic
 
 EXPOSE 8080
-CMD ["sh", "-c", "exec uvicorn app.main:app --host 0.0.0.0 --port ${PORT} --proxy-headers --forwarded-allow-ips='*'"]
+CMD ["sh", "-c", "mkdir -p \"$CACHE_DIR\" && cp -rn /app/seed-cache/. \"$CACHE_DIR\"/ 2>/dev/null; exec uvicorn app.main:app --host 0.0.0.0 --port ${PORT} --proxy-headers --forwarded-allow-ips='*'"]
