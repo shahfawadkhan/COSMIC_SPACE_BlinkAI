@@ -12,6 +12,21 @@ different dates. Things that move (brown dwarfs, nearby stars, asteroids) or cha
 
 ---
 
+## Demo video
+
+<p align="center">
+  <a href="demo/COSMIC-demo.mp4">
+    <img src="demo/preview.gif" alt="COSMIC Space Blink AI demo: Barnard's Star detected and named in Difference mode" width="820">
+  </a>
+</p>
+
+<p align="center">
+  <a href="demo/COSMIC-demo.mp4"><b>▶ Watch the full demo (1 min 14 s)</b></a>
+  &nbsp;·&nbsp; Mission Control → Blink Explorer → Barnard's Star found and named → AstroAnalytics → Planet X Lab → Cosmo assistant
+</p>
+
+---
+
 ## Team
 
 | Member | Role |
@@ -28,17 +43,18 @@ different dates. Things that move (brown dwarfs, nearby stars, asteroids) or cha
 
 ## Contents
 
-1. [Team](#team)
-2. [What the app does](#what-the-app-does)
-3. [Quick start](#quick-start)
-4. [How to test the challenge objects](#how-to-test-the-challenge-objects)
-5. [How to check an unknown object](#how-to-check-an-unknown-object)
-6. [Planet X Lab](#planet-x-lab)
-7. [Architecture](#architecture)
-8. [Repository layout](#repository-layout)
-9. [Running the tests](#running-the-tests)
-10. [Team workflow](#team-workflow)
-11. [Data sources and credits](#data-sources-and-credits)
+1. [Demo video](#demo-video)
+2. [Team](#team)
+3. [What the app does](#what-the-app-does)
+4. [Quick start](#quick-start)
+5. [How to test the challenge objects](#how-to-test-the-challenge-objects)
+6. [How to check an unknown object](#how-to-check-an-unknown-object)
+7. [Planet X Lab](#planet-x-lab)
+8. [Architecture](#architecture)
+9. [Repository layout](#repository-layout)
+10. [Running the tests](#running-the-tests)
+11. [Team workflow](#team-workflow)
+12. [Data sources and credits](#data-sources-and-credits)
 
 ---
 
