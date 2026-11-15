@@ -66,8 +66,9 @@ different dates. Things that move (brown dwarfs, nearby stars, asteroids) or cha
 8. [Architecture](#architecture)
 9. [Repository layout](#repository-layout)
 10. [Running the tests](#running-the-tests)
-11. [Team workflow](#team-workflow)
-12. [Data sources and credits](#data-sources-and-credits)
+11. [Deployment](#deployment)
+12. [Team workflow](#team-workflow)
+13. [Data sources and credits](#data-sources-and-credits)
 
 ---
 
@@ -256,6 +257,9 @@ COSMIC/
 ├── docs/
 │   ├── COSMIC-Space-Blink-AI-Documentation.pdf   full project documentation
 │   └── Testing.md      tester checklist
+├── Dockerfile          one container: backend + built frontend
+├── firebase.json       Firebase Hosting + /api rewrite to Cloud Run
+├── DEPLOY.md           deployment steps
 └── README.md
 ```
 
@@ -270,6 +274,26 @@ cd ..\frontend
 npm run typecheck                          # frontend: TypeScript
 npm run build                              # production build in dist/
 ```
+
+---
+
+## Deployment
+
+COSMIC is deployed as one website: **Firebase Hosting** serves the frontend and forwards `/api/**`
+to the backend container on **Google Cloud Run**; a **GoDaddy** domain points at Firebase.
+
+```
+Browser -> your domain (GoDaddy) -> Firebase Hosting (frontend) --/api/**--> Cloud Run (FastAPI backend)
+```
+
+- `Dockerfile`: builds the frontend and the backend into one container (the backend also serves the
+  built frontend, so the Cloud Run URL works on its own).
+- `firebase.json`: Firebase Hosting config with the `/api/**` rewrite to Cloud Run.
+- **[DEPLOY.md](DEPLOY.md)**: step-by-step commands (Google Cloud setup, AI key in Secret Manager,
+  Cloud Run, Firebase Hosting, GoDaddy DNS).
+
+Try the container locally: `docker build -t cosmic-blink .` then
+`docker run -p 8080:8080 -e SPHEREX_AI_KEY=... cosmic-blink` and open http://localhost:8080.
 
 ---
 

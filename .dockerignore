@@ -1,0 +1,22 @@
+# keep the image small and free of secrets
+.git
+.claude
+**/__pycache__
+**/*.pyc
+.pytest_cache
+
+# secrets: pass SPHEREX_AI_KEY as an environment variable / secret instead
+**/.env
+
+backend/.venv
+backend/cache
+backend/tests
+
+frontend/node_modules
+frontend/dist
+**/*.tsbuildinfo
+
+demo
+docs
+*.zip
+*.mp4
