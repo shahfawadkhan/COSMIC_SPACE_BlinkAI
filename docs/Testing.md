@@ -12,7 +12,7 @@ Mark each line ✅ or ❌. For ❌, open a GitHub Issue with the page, the steps
 |---|---|---|
 | 1.1 | Open http://localhost:3000 | Top bar shows **Online** (green) and Redis status. No red error banner. |
 | 1.2 | Click **Watch Barnard's Star move** | Blink Explorer opens, shows progress, then blinks images with the **NASA IRSA DATA** chip. |
-| 1.3 | Press `5` (Difference mode) | A red ring named **Barnard's Star** with an arrow pointing north; Inspector says *✓ matches catalogue motion*. |
+| 1.3 | Click detector **3** on the timeline, then press `5` (Difference mode) | A red ring named **Barnard's Star** with an arrow pointing north; Inspector says *✓ matches catalogue motion*. |
 | 1.4 | Click D1 … D6 on the timeline | Images change with each detector. |
 | 1.5 | Open `/planetx`, choose *Pure synthetic*, click **Run injection test** | Red SIMULATED banner at the top; result *Injected object recovered in 4 of 4 visit pairs*. |
 | 1.6 | Open Cosmo (robot button), ask *What is SPHEREx?* | Answer tagged **SPHEREx AI**, with sources and a **✓ Verified facts** box. |
