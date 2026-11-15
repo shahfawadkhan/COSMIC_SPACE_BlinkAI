@@ -22,17 +22,22 @@ different dates. Things that move (brown dwarfs, nearby stars, asteroids) or cha
 
 ---
 
-## Demo video
+## Demo videos
 
 <p align="center">
-  <a href="demo/COSMIC-demo.mp4">
+  <a href="https://youtu.be/V3OeGmhHFeQ">
     <img src="demo/preview.gif" alt="COSMIC Space Blink AI demo: Barnard's Star detected and named in Difference mode" width="820">
   </a>
 </p>
 
 <p align="center">
-  <a href="demo/COSMIC-demo.mp4"><b>▶ Watch the full demo (1 min 14 s)</b></a>
-  &nbsp;·&nbsp; Mission Control → Blink Explorer → Barnard's Star found and named → AstroAnalytics → Planet X Lab → Cosmo assistant
+  ▶ <a href="https://youtu.be/V3OeGmhHFeQ"><b>Project demo (YouTube)</b></a>
+  &nbsp;·&nbsp;
+  ▶ <a href="https://youtu.be/JoeFlWoiD3U"><b>Full UI walkthrough (YouTube)</b></a>
+</p>
+
+<p align="center">
+  Mission Control → Blink Explorer → Barnard's Star found and named → AstroAnalytics → Planet X Lab → Cosmo assistant
 </p>
 
 <p align="center">
