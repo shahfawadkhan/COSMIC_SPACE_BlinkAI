@@ -8,11 +8,13 @@ observation id and planning period from the file name.
 from __future__ import annotations
 
 import io
+import json
 import logging
 import math
 import re
 import time
 import warnings
+from pathlib import Path
 from urllib.parse import urlparse
 
 import numpy as np
@@ -188,6 +190,36 @@ def _validate(ra: float, dec: float, radius_deg: float) -> None:
         raise BadRequest("Search radius must be between 0 and 1 degree")
 
 
+STALE_MATCH_DEG = 0.01  # 36″: a saved search this close is reused when IRSA is down
+
+
+def _nearest_saved_search(ra: float, dec: float, radius_deg: float,
+                          collections: list[str]) -> dict | None:
+    """Closest earlier search result on disk (expired or not) within STALE_MATCH_DEG.
+
+    Used only when IRSA fails. The caller re-centres the field on the saved position so
+    the cutouts already on disk are reused instead of downloaded.
+    """
+    folder = Path(cache_mod.get_cache().dir) / "json" / cache_mod.NS_SEARCH
+    best, best_sep = None, STALE_MATCH_DEG
+    cos_dec = math.cos(math.radians(dec))
+    for f in folder.glob("*.json") if folder.is_dir() else []:
+        try:
+            value = json.loads(f.read_text(encoding="utf-8")).get("value") or {}
+            q = value["query"]
+        except (OSError, ValueError, KeyError, TypeError):
+            continue
+        if not value.get("count") or value.get("collections") != collections:
+            continue
+        if q.get("radius_deg", 0) < radius_deg:
+            continue
+        dra = ((q["ra"] - ra + 180.0) % 360.0 - 180.0) * cos_dec
+        sep = math.hypot(dra, q["dec"] - dec)
+        if sep <= best_sep:
+            best, best_sep = value, sep
+    return best
+
+
 def search(ra: float, dec: float, radius_deg: float, *, use_cache: bool = True,
            collections: list[str] | None = None) -> dict:
     """Search SPHEREx Level-2 images overlapping a circle. Cached 30 min."""
@@ -214,7 +246,18 @@ def search(ra: float, dec: float, radius_deg: float, *, use_cache: bool = True,
             continue
         observations.extend(parse_votable(resp.content, ra, dec, collection))
     if errors and not observations and len(errors) == len(collections):
-        raise UpstreamError("SPHEREx search failed. " + " | ".join(errors))
+        # NASA's archive is down. Fall back to an image list saved earlier for this spot.
+        stale = _nearest_saved_search(ra, dec, radius_deg, collections)
+        if stale is not None:
+            stale["cached"] = True
+            stale["stale"] = True
+            stale["warnings"] = list(stale.get("warnings") or []) + [
+                "NASA IRSA is not responding; using the image list saved earlier for this field."]
+            return stale
+        raise UpstreamError(
+            "NASA's IRSA archive is not responding right now (" + " | ".join(errors) + "). "
+            "This is a problem on NASA's side, not in COSMIC. Fields opened earlier still work; "
+            "please try this one again in a few minutes.")
 
     # De-duplicate (same file listed twice) and sort by date.
     unique = {o["url"]: o for o in observations}

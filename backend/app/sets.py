@@ -179,6 +179,12 @@ def build_set(job: Job, p: dict, set_id: str) -> dict:
     job.set_stage("searching", message="Searching NASA IRSA for SPHEREx images")
     t = time.perf_counter()
     search = irsa.search(ra, dec, SEARCH_RADIUS_DEG, collections=p["collections"])
+    if search.get("stale"):
+        # IRSA is down and an earlier image list was reused: centre on that saved position
+        # (at most 36″ away) so the cutouts already on disk match and nothing is downloaded.
+        ra, dec = search["query"]["ra"], search["query"]["dec"]
+        p = {**p, "ra": ra, "dec": dec}
+        job.set_stage("searching", message="NASA IRSA is not responding; using images saved earlier")
     timings["search"] = time.perf_counter() - t
     t = time.perf_counter()
     sel = irsa.select_frames(search["observations"], p["max_frames"])

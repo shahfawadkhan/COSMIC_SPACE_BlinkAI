@@ -190,6 +190,12 @@ def request_with_mirrors(
             if resp.status_code in (429, 503):  # busy: wait once as asked, then retry
                 time.sleep(min(retry_after_s(resp, 2.0), 10.0))
                 resp = session.request(method, url, timeout=timeout, **kwargs)
+            elif resp.status_code in (502, 504):  # proxy hiccup at the archive: retry twice
+                for pause in (1.5, 4.0):
+                    time.sleep(pause)
+                    resp = session.request(method, url, timeout=timeout, **kwargs)
+                    if resp.status_code not in (502, 504):
+                        break
         except requests.Timeout:
             msg = f"timed out after {timeout:g}s"
         except requests.RequestException as exc:

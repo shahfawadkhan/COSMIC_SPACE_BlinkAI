@@ -103,7 +103,22 @@ def test_search_upstream_error_and_breaker(cache, fake_http, monkeypatch):
     with pytest.raises(UpstreamError) as e2:
         irsa.search(RA, DEC, 0.06)
     assert "skipped" in e2.value.message
-    assert len(calls) == 1  # second call skipped by the circuit breaker
+    assert len(calls) == 3  # 1 try + 2 retries on 502; second search skipped by the breaker
+
+
+def test_search_falls_back_to_saved_list_when_irsa_down(cache, fake_http, monkeypatch):
+    monkeypatch.setattr(net.time, "sleep", lambda s: None)
+    first = irsa.search(RA, DEC, 0.05)  # IRSA up: saved to disk
+    assert first["count"] > 0 and not first.get("stale")
+    _, payload = fake_http
+    payload["status"] = 502
+    net.breaker.reset()
+    later = irsa.search(RA + 0.002, DEC, 0.05, use_cache=False)  # 7″ away, IRSA down
+    assert later["stale"] is True and later["count"] == first["count"]
+    assert later["query"]["ra"] == pytest.approx(RA)
+    with pytest.raises(UpstreamError) as e:  # nothing saved this far away
+        irsa.search(RA + 1.0, DEC, 0.05, use_cache=False)
+    assert "NASA" in e.value.message
 
 
 def test_busy_reply_waits_and_retries_once(cache, fake_http, monkeypatch):
