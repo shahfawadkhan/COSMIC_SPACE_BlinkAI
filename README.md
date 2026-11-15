@@ -25,6 +25,11 @@ different dates. Things that move (brown dwarfs, nearby stars, asteroids) or cha
   &nbsp;·&nbsp; Mission Control → Blink Explorer → Barnard's Star found and named → AstroAnalytics → Planet X Lab → Cosmo assistant
 </p>
 
+<p align="center">
+  📄 <a href="docs/COSMIC-Space-Blink-AI-Documentation.pdf"><b>Read the full project documentation (PDF, 12 pages)</b></a>
+  &nbsp;·&nbsp; team, guided tour, results on the challenge objects, Planet X Lab, how it works
+</p>
+
 ---
 
 ## Team
@@ -241,6 +246,7 @@ COSMIC/
 │       ├── state/      workspace, view, settings, candidates
 │       ├── hooks/ lib/ helpers (coordinates, URL, keys)
 ├── docs/
+│   ├── COSMIC-Space-Blink-AI-Documentation.pdf   full project documentation
 │   └── Testing.md      tester checklist
 └── README.md
 ```
