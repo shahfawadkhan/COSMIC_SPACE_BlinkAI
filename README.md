@@ -4,7 +4,9 @@
 
 > *Blink the Sky. Discover What Changed.*
 
-### 🚀 Live app: **[cosmic-blink-ai-2083.web.app](https://cosmic-blink-ai-2083.web.app)**
+### 🚀 Live app: **[cosmicblink.earth](https://cosmicblink.earth)**
+
+Also at [cosmic-blink-ai-2083.web.app](https://cosmic-blink-ai-2083.web.app).
 
 Try it: open the link → **Watch Barnard's Star move** → pick detector **D3** → **Difference** mode.
 Frontend on Firebase Hosting, backend on Google Cloud Run. The first load of a new field takes
