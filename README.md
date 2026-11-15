@@ -19,8 +19,8 @@ different dates. Things that move (brown dwarfs, nearby stars, asteroids) or cha
 | **Aneesa Fatima** (Team Lead) | Astroanalysis |
 | **Shah Fawad Khan** | Backend Developer |
 | **Adeena Zaineb** | Image Processing Engineer |
-| **@ADINAJS** | Frontend Developer |
-| AI-assistant role | Cosmo chatbot and the SPHEREx AI service |
+| **Adina Saif Ullah** | Frontend Developer |
+| **Munib Ur Rehman** | Cosmo chatbot and the SPHEREx AI service |
 
 **Challenge:** [Planet X and SPHEREx](https://www.spaceappschallenge.org/) — NASA Space Apps Challenge 2026
 
