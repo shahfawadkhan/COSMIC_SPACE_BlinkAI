@@ -11,7 +11,7 @@ Disk layout under CACHE_DIR:
     json/<namespace>/<hash>.json     {"expires_at": epoch|null, "value": ...}
     bytes/<namespace>/<hash>.bin     5-byte magic + 8-byte expiry + payload
     arrays/<namespace>/<hash>.npz    numpy arrays (+ "__meta__" JSON string)
-
+"""
 from __future__ import annotations
 
 import hashlib
