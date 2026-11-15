@@ -2,6 +2,14 @@
 
 **SPHEREx motion & change finder** · NASA Space Apps Challenge 2026 · *Planet X and SPHEREx*
 
+> *Blink the Sky. Discover What Changed.*
+
+### 🚀 Live app: **[cosmic-blink-ai-2083.web.app](https://cosmic-blink-ai-2083.web.app)**
+
+Try it: open the link → **Watch Barnard's Star move** → pick detector **D3** → **Difference** mode.
+Frontend on Firebase Hosting, backend on Google Cloud Run. The first load of a new field takes
+30–60 s while SPHEREx cutouts download from IRSA; after that it opens in about a second.
+
 COSMIC lets anyone pick a patch of sky and *blink* real NASA SPHEREx infrared images taken on
 different dates. Things that move (brown dwarfs, nearby stars, asteroids) or change brightness
 (variable stars) stand out. Movers are ringed and named from SIMBAD and Gaia DR3 where possible.
