@@ -34,7 +34,7 @@ export default function SettingsPage() {
   const redis = (stats?.redis as { status?: string } | undefined)?.status;
 
   const testBase = async () => {
-    const url = (base.trim().replace(/\/+$/, "") || "") + "/api/health";
+    const url = base.trim() ? base.trim().replace(/\/+$/, "") + "/api/health" : apiUrl("/api/health");
     setTest("Testing…");
     const t0 = performance.now();
     try {

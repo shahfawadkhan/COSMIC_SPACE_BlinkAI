@@ -229,10 +229,14 @@ export class ApiError extends Error {
   }
 }
 
-/** Prefix an /api path with the configured backend base URL (Settings > API base URL). */
+/** Backend chosen at build time (VITE_API_BASE), used when Settings leaves the API base URL empty. */
+const BUILD_API_BASE = ((import.meta.env.VITE_API_BASE as string | undefined) ?? "").trim();
+
+/** Prefix an /api path with the backend base URL: Settings > API base URL, else the build default,
+ * else the same origin (the Vite dev proxy). */
 export function apiUrl(path: string): string {
   if (!path.startsWith("/")) return path;
-  const base = readSettings().apiBaseUrl.trim().replace(/\/+$/, "");
+  const base = (readSettings().apiBaseUrl.trim() || BUILD_API_BASE).replace(/\/+$/, "");
   return base + path;
 }
 

@@ -1,0 +1,19 @@
+# Render Blueprint: free backend for cosmicblink.earth (frontend stays on Firebase Hosting).
+# Deploy: https://render.com/deploy?repo=https://github.com/shahfawadkhan/COSMIC_SPACE_BlinkAI
+services:
+  - type: web
+    name: cosmic-blink-api
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: SPHEREX_AI_KEY        # Cosmo assistant key: Render asks for it during deploy
+        sync: false
+      - key: SPHEREX_AI_URL
+        value: https://spherex-chatbot.onrender.com
+      - key: CPU_WORKERS           # 0 = process images inline; keeps memory inside the free 512 MB
+        value: "0"
+      - key: HTTP_WORKERS
+        value: "8"
